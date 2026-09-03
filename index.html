@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>INEN — 클로즈 베타 사전 예약</title>
+    <meta
+      name="description"
+      content="INEN 클로즈 베타 사전 예약. 남 · 여 각 50명 선착순, 이야기는 홈에서, 설치는 초대 후에."
+    />
+    <meta name="theme-color" content="#f7f3ee" />
+    <meta property="og:title" content="INEN — 클로즈 베타 사전 예약" />
+    <meta property="og:description" content="하루 한 사람. 믿음 안에서 만나고, 열매를 맺은 뒤 떠납니다." />
+    <meta property="og:image" content="images/splash-field.png" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-landing">
+    <a class="skip" href="#reserve">예약으로 건너뛰기</a>
+
+    <header class="nav" id="nav">
+      <div class="nav-inner">
+        <a class="wordmark" href="home.html#top" aria-label="INEN 홈">INEN</a>
+        <nav class="nav-links" id="nav-links" aria-label="주요 메뉴">
+          <a href="home.html#story">이야기</a>
+          <a href="home.html#how">이용 방법</a>
+          <a href="home.html#voices">만남</a>
+          <a href="install.html">앱 설치</a>
+        </nav>
+        <a class="nav-cta" href="#reserve">사전 예약</a>
+        <button class="menu" id="menu" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="gate">
+        <div class="gate-copy">
+          <p class="kicker" data-show="closed-beta">Closed beta</p>
+          <p class="kicker kicker-sky" data-show="open-beta" hidden>Open beta</p>
+          <p class="kicker kicker-sky" data-show="live" hidden>INEN</p>
+
+          <h1 data-show="closed-beta">
+            선착순 백 명과<br />
+            <em>문을 엽니다.</em>
+          </h1>
+          <h1 data-show="open-beta" hidden>
+            이제 함께<br />
+            <em>걸어갈 수 있습니다.</em>
+          </h1>
+          <h1 data-show="live" hidden>
+            오늘의 한 사람을<br />
+            <em>만나러 갑니다.</em>
+          </h1>
+
+          <p class="lede" data-show="closed-beta">
+            남성 50명, 여성 50명. 각 성별 정원이 차는 순간 클로즈 베타를 시작합니다.
+          </p>
+          <p class="lede" data-show="open-beta" hidden>
+            닫힌 테스트를 지나, 더 많은 분이 함께할 수 있는 오픈 베타입니다.
+            이야기를 읽고, 앱 설치 안내로 이어져 주세요.
+          </p>
+          <p class="lede" data-show="live" hidden>
+            스토어에서 INEN을 받을 수 있습니다. 그전에 이야기로 호흡을 맞춰 주세요.
+          </p>
+
+          <ol class="path" aria-label="참여 순서">
+            <li class="is-now"><span>01</span>사전 예약</li>
+            <li><span>02</span>이야기</li>
+            <li><span>03</span>앱 설치</li>
+          </ol>
+
+          <div class="seats" data-show="closed-beta">
+            <article data-seat="male">
+              <header>
+                <b>남성</b>
+                <em data-seat-tag>모집 중</em>
+              </header>
+              <div class="seat-track is-sky" aria-hidden="true"><i data-seat-fill></i></div>
+              <p data-seat-count>0 / 50</p>
+            </article>
+            <article data-seat="female">
+              <header>
+                <b>여성</b>
+                <em data-seat-tag>모집 중</em>
+              </header>
+              <div class="seat-track" aria-hidden="true"><i data-seat-fill></i></div>
+              <p data-seat-count>0 / 50</p>
+            </article>
+          </div>
+          <p class="seat-note" id="seat-note" data-show="closed-beta"></p>
+        </div>
+
+        <div class="gate-card" id="reserve">
+          <form class="begin-form" id="reserve-form">
+            <p class="kicker">Reserve</p>
+            <h2 data-show="closed-beta">클로즈 베타<br />사전 예약</h2>
+            <h2 data-show="open-beta live" hidden>지금 함께하기</h2>
+
+            <fieldset class="gender">
+              <legend>성별</legend>
+              <label><input type="radio" name="gender" value="male" required /> 남성</label>
+              <label><input type="radio" name="gender" value="female" /> 여성</label>
+            </fieldset>
+            <fieldset class="gender">
+              <legend>국적</legend>
+              <label><input type="radio" name="nationality" value="kr" required /> 한국</label>
+              <label><input type="radio" name="nationality" value="jp" /> 日本</label>
+            </fieldset>
+            <label>
+              이름
+              <input name="name" type="text" autocomplete="name" required placeholder="호칭 또는 이름" />
+            </label>
+            <label>
+              이메일
+              <input name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+            </label>
+            <button class="btn btn-fill" type="submit">예약하고 이야기 보기</button>
+            <p class="fine">예약 후 홈페이지에서 INEN을 읽고, 앱 설치 안내로 이어집니다.</p>
+          </form>
+
+          <div class="reserve-ok" id="reserve-ok" hidden>
+            <p class="kicker kicker-sky">Saved</p>
+            <h2>다음 화면으로<br />이어집니다</h2>
+            <p id="reserve-ok-copy"></p>
+            <div class="hero-actions">
+              <a class="btn btn-fill" href="home.html">이야기 읽기</a>
+              <a class="btn btn-sky" href="install.html">앱 설치 안내</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gate-photo">
+        <figure>
+          <img src="images/intro-today.png" alt="해 질 녘, 손을 잡고 길을 걷는 두 사람" />
+        </figure>
+        <p>
+          먼저 둘러보고 싶다면
+          <a href="home.html">홈페이지로 가기</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <a class="wordmark" href="home.html#top">INEN</a>
+        <p>Faith · Respect · Love</p>
+      </div>
+      <nav>
+        <a href="home.html#story">이야기</a>
+        <a href="home.html#how">이용 방법</a>
+        <a href="home.html#voices">만남</a>
+        <a href="install.html">앱 설치</a>
+        <a href="#reserve">사전 예약</a>
+      </nav>
+      <p class="copy">© 2026 INEN. 클로즈 베타에서 시작해, 정식으로 이어집니다.</p>
+    </footer>
+
+    <script src="js/launch.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

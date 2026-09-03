@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>INEN — 앱 설치</title>
+    <meta name="description" content="INEN 앱 설치 안내. 스토어 등록이 끝나는 순간, 이 화면에서 바로 연결됩니다." />
+    <meta name="theme-color" content="#f7f3ee" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="apple-touch-icon" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page-install">
+    <a class="skip" href="#stores">설치로 건너뛰기</a>
+
+    <header class="nav" id="nav">
+      <div class="nav-inner">
+        <a class="wordmark" href="home.html#top" aria-label="INEN 홈">INEN</a>
+        <nav class="nav-links" id="nav-links" aria-label="주요 메뉴">
+          <a href="home.html#story">이야기</a>
+          <a href="home.html#how">이용 방법</a>
+          <a href="home.html#voices">만남</a>
+          <a href="install.html" aria-current="page">앱 설치</a>
+        </nav>
+        <a class="nav-cta" href="index.html#reserve">사전 예약</a>
+        <button class="menu" id="menu" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="install">
+        <div class="install-copy">
+          <p class="kicker" data-show="closed-beta">Invite</p>
+          <p class="kicker kicker-sky" data-show="open-beta" hidden>Open beta</p>
+          <p class="kicker kicker-sky" data-show="live" hidden>Download</p>
+
+          <h1 data-show="closed-beta">
+            초대가 오면,<br />
+            <em>여기에서 설치합니다.</em>
+          </h1>
+          <h1 data-show="open-beta" hidden>
+            오픈 베타를<br />
+            <em>이 화면에서 받습니다.</em>
+          </h1>
+          <h1 data-show="live" hidden>
+            INEN을<br />
+            <em>지금 설치합니다.</em>
+          </h1>
+
+          <p class="lede" data-show="closed-beta">
+            아직 앱스토어와 Google Play에 올라가지 않았습니다.
+            TestFlight나 내부 테스트 링크가 생기는 즉시 아래 버튼이 연결됩니다.
+            그전까지는 예약과 이야기가 먼저입니다.
+          </p>
+          <p class="lede" data-show="open-beta live" hidden>
+            iOS와 Android 중 쓰시는 쪽으로 이어집니다.
+            교회 인증 뒤에 오늘의 소개가 열립니다.
+          </p>
+
+          <ol class="path" aria-label="설치까지">
+            <li><span>01</span>사전 예약</li>
+            <li><span>02</span>이야기</li>
+            <li class="is-now"><span>03</span>앱 설치</li>
+          </ol>
+        </div>
+
+        <div class="store-board" id="stores">
+          <a class="store-card is-soon" data-store="ios" href="#">
+            <span class="store-os">iOS</span>
+            <strong>App Store</strong>
+            <small data-store-soon>등록 준비 중 · 링크가 열리면 연결됩니다</small>
+            <small data-store-ready hidden>탭해서 설치하기</small>
+          </a>
+          <a class="store-card is-soon" data-store="android" href="#">
+            <span class="store-os">Android</span>
+            <strong>Google Play</strong>
+            <small data-store-soon>등록 준비 중 · 링크가 열리면 연결됩니다</small>
+            <small data-store-ready hidden>탭해서 설치하기</small>
+          </a>
+          <p class="fine">링크가 준비되면 이 카드가 App Store와 Google Play로 바뀝니다.</p>
+          <div class="hero-actions">
+            <a class="btn btn-sky" href="home.html">이야기로 돌아가기</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <a class="wordmark" href="home.html#top">INEN</a>
+        <p>Faith · Respect · Love</p>
+      </div>
+      <nav>
+        <a href="home.html#story">이야기</a>
+        <a href="home.html#how">이용 방법</a>
+        <a href="home.html#voices">만남</a>
+        <a href="install.html">앱 설치</a>
+        <a href="index.html#reserve">사전 예약</a>
+      </nav>
+      <p class="copy">© 2026 INEN. 초대가 오는 날을 위해.</p>
+    </footer>
+
+    <script src="js/launch.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
