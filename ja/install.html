@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>INEN — アプリ</title>
+    <meta name="description" content="INENアプリのご案内。ストア登録が終わり次第、この画面からつながります。" />
+    <meta name="theme-color" content="#f7f3ee" />
+    <link rel="icon" type="image/png" href="../images/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+    <link rel="alternate" hreflang="ko" href="../install.html" />
+    <link rel="alternate" hreflang="ja" href="install.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="page-install">
+    <a class="skip" href="#stores">インストールへスキップ</a>
+
+    <header class="nav" id="nav">
+      <div class="nav-inner">
+        <a class="wordmark" href="home.html#top" aria-label="INEN ホーム">INEN</a>
+        <nav class="nav-links" id="nav-links" aria-label="メニュー">
+          <a href="home.html#story">ストーリー</a>
+          <a href="home.html#how">使い方</a>
+          <a href="home.html#voices">出会い</a>
+          <a href="install.html" aria-current="page">アプリ</a>
+        </nav>
+        <a class="nav-cta" href="index.html#reserve">事前予約</a>
+        <nav class="nav-lang" aria-label="言語">
+          <a href="../install.html" hreflang="ko" lang="ko">한국어</a>
+          <span aria-hidden="true">|</span>
+          <a href="install.html" hreflang="ja" lang="ja" aria-current="true">日本語</a>
+        </nav>
+        <button class="menu" id="menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="install">
+        <div class="install-copy">
+          <p class="kicker" data-show="closed-beta">Invite</p>
+          <p class="kicker kicker-sky" data-show="open-beta" hidden>Open beta</p>
+          <p class="kicker kicker-sky" data-show="live" hidden>Download</p>
+
+          <h1 data-show="closed-beta">
+            招待が届いたら、<br />
+            <em>こちらでインストールします。</em>
+          </h1>
+          <h1 data-show="open-beta" hidden>
+            オープンβを、<br />
+            <em>この画面から受け取ります。</em>
+          </h1>
+          <h1 data-show="live" hidden>
+            INENを、<br />
+            <em>いまインストールします。</em>
+          </h1>
+
+          <p class="lede" data-show="closed-beta">
+            まだ App Store と Google Play には並んでいません。
+            TestFlight や内部テストのリンクができ次第、下のボタンがつながります。
+            それまでは、ご予約とストーリーが先です。
+          </p>
+          <p class="lede" data-show="open-beta live" hidden>
+            iOS か Android、お使いのほうへ進みます。
+            教会の認証のあと、今日の紹介が開きます。
+          </p>
+
+          <ol class="path" aria-label="インストールまで">
+            <li><span>01</span>事前予約</li>
+            <li><span>02</span>ストーリー</li>
+            <li class="is-now"><span>03</span>アプリ</li>
+          </ol>
+        </div>
+
+        <div class="store-board" id="stores">
+          <a class="store-card is-soon" data-store="ios" href="#">
+            <span class="store-os">iOS</span>
+            <strong>App Store</strong>
+            <small data-store-soon>登録の準備中 · リンクができ次第つながります</small>
+            <small data-store-ready hidden>タップしてインストール</small>
+          </a>
+          <a class="store-card is-soon" data-store="android" href="#">
+            <span class="store-os">Android</span>
+            <strong>Google Play</strong>
+            <small data-store-soon>登録の準備中 · リンクができ次第つながります</small>
+            <small data-store-ready hidden>タップしてインストール</small>
+          </a>
+          <p class="fine">リンクの準備ができたら、このカードが App Store と Google Play に変わります。</p>
+          <div class="hero-actions">
+            <a class="btn btn-sky" href="home.html">ストーリーへ戻る</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <a class="wordmark" href="home.html#top">INEN</a>
+        <p>Faith · Respect · Love</p>
+      </div>
+      <nav>
+        <a href="home.html#story">ストーリー</a>
+        <a href="home.html#how">使い方</a>
+        <a href="home.html#voices">出会い</a>
+        <a href="install.html">アプリ</a>
+        <a href="index.html#reserve">事前予約</a>
+      </nav>
+      <p class="copy">© 2026 INEN. 招待が届く日を、待っています。</p>
+    </footer>
+
+    <script src="../js/launch.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

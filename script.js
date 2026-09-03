@@ -1,3 +1,4 @@
+const ja = document.documentElement.lang === "ja";
 const nav = document.getElementById("nav");
 const menu = document.getElementById("menu");
 const links = document.getElementById("nav-links");
@@ -16,7 +17,7 @@ if (menu && nav) {
   menu.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
     menu.setAttribute("aria-expanded", String(open));
-    menu.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+    menu.setAttribute("aria-label", open ? (ja ? "メニューを閉じる" : "메뉴 닫기") : ja ? "メニューを開く" : "메뉴 열기");
     document.body.style.overflow = open ? "hidden" : "";
   });
 }
@@ -26,11 +27,22 @@ if (links) {
     a.addEventListener("click", () => {
       nav.classList.remove("is-open");
       menu?.setAttribute("aria-expanded", "false");
-      menu?.setAttribute("aria-label", "메뉴 열기");
+      menu?.setAttribute("aria-label", ja ? "メニューを開く" : "메뉴 열기");
       document.body.style.overflow = "";
     });
   });
 }
+
+document.querySelectorAll(".nav-lang a").forEach((a) => {
+  a.addEventListener("click", (e) => {
+    const hash = location.hash;
+    if (!hash) return;
+    const href = a.getAttribute("href");
+    if (!href) return;
+    e.preventDefault();
+    location.href = href.split("#")[0] + hash;
+  });
+});
 
 if (form && ok) {
   form.addEventListener("submit", (e) => {

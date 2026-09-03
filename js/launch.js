@@ -34,6 +34,28 @@ window.InenLaunch = {
 (function () {
   const L = window.InenLaunch;
   const KEY = "inen-reservations";
+  const ja = document.documentElement.lang === "ja";
+  const t = ja
+    ? {
+        closed: "満員",
+        open: "募集中",
+        noteBoth: "先着は満員です。お名前はキャンセル待ちに載せ、招待は順にお送りします。",
+        noteMale: "男性の先着は満員です。男性はキャンセル待ちで受け付けます。",
+        noteFemale: "女性の先着は満員です。女性はキャンセル待ちで受け付けます。",
+        noteOpen: "男女それぞれ50名に達した時点で、その性別は満員と表示されます。",
+        okWait: "先着はすでに埋まっています。キャンセル待ちに載せました。招待が開きましたら、メールでお知らせします。",
+        okSeat: "事前予約を受け付けました。ストーリーを読んで、インストールのご案内へお進みください。",
+      }
+    : {
+        closed: "모집 마감",
+        open: "모집 중",
+        noteBoth: "선착순은 마감되었습니다. 이름은 대기 명단에 올리고, 초대는 순차로 이어집니다.",
+        noteMale: "남성 선착순은 마감되었습니다. 남성은 대기 명단으로 접수됩니다.",
+        noteFemale: "여성 선착순은 마감되었습니다. 여성은 대기 명단으로 접수됩니다.",
+        noteOpen: "남 · 여 각 50명 모집 시 해당 성별은 마감으로 표시됩니다.",
+        okWait: "선착순은 이미 찼습니다. 대기 명단에 올렸고, 초대가 열리면 메일로 알려 드립니다.",
+        okSeat: "사전 예약이 접수되었습니다. 이야기를 읽고, 설치 안내로 이어져 주세요.",
+      };
 
   function reservations() {
     try {
@@ -76,19 +98,19 @@ window.InenLaunch = {
       if (fill) fill.style.width = `${Math.min(100, (n / cap) * 100)}%`;
       if (num) num.textContent = `${Math.min(n, cap)} / ${cap}`;
       root.classList.toggle("is-closed", closed);
-      if (tag) tag.textContent = closed ? "모집 마감" : "모집 중";
+      if (tag) tag.textContent = closed ? t.closed : t.open;
     });
     const note = document.getElementById("seat-note");
     if (!note) return;
     const both = now.male >= L.caps.male && now.female >= L.caps.female;
     if (both) {
-      note.textContent = "선착순은 마감되었습니다. 이름은 대기 명단에 올리고, 초대는 순차로 이어집니다.";
+      note.textContent = t.noteBoth;
     } else if (now.male >= L.caps.male) {
-      note.textContent = "남성 선착순은 마감되었습니다. 남성은 대기 명단으로 접수됩니다.";
+      note.textContent = t.noteMale;
     } else if (now.female >= L.caps.female) {
-      note.textContent = "여성 선착순은 마감되었습니다. 여성은 대기 명단으로 접수됩니다.";
+      note.textContent = t.noteFemale;
     } else {
-      note.textContent = "남 · 여 각 50명 모집 시 해당 성별은 마감으로 표시됩니다.";
+      note.textContent = t.noteOpen;
     }
   }
 
@@ -114,9 +136,7 @@ window.InenLaunch = {
       form.hidden = true;
       if (ok) ok.hidden = false;
       if (okCopy) {
-        okCopy.textContent = full
-          ? "선착순은 이미 찼습니다. 대기 명단에 올렸고, 초대가 열리면 메일로 알려 드립니다."
-          : "사전 예약이 접수되었습니다. 이야기를 읽고, 설치 안내로 이어져 주세요.";
+        okCopy.textContent = full ? t.okWait : t.okSeat;
       }
       paintSeats();
     });

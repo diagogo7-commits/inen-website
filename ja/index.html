@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>INEN — クローズドβ 事前予約</title>
+    <meta
+      name="description"
+      content="INENクローズドβの事前予約。男女各50名の先着。ストーリーはホームで、インストールは招待のあと。"
+    />
+    <meta name="theme-color" content="#f7f3ee" />
+    <meta property="og:title" content="INEN — クローズドβ 事前予約" />
+    <meta property="og:description" content="一日ひとり。信仰のなかで出会い、実を結んだら去ります。" />
+    <meta property="og:image" content="../images/splash-field.png" />
+    <link rel="icon" type="image/png" href="../images/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+    <link rel="alternate" hreflang="ko" href="../index.html" />
+    <link rel="alternate" hreflang="ja" href="index.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="page-landing">
+    <a class="skip" href="#reserve">予約へスキップ</a>
+
+    <header class="nav" id="nav">
+      <div class="nav-inner">
+        <a class="wordmark" href="home.html#top" aria-label="INEN ホーム">INEN</a>
+        <nav class="nav-links" id="nav-links" aria-label="メニュー">
+          <a href="home.html#story">ストーリー</a>
+          <a href="home.html#how">使い方</a>
+          <a href="home.html#voices">出会い</a>
+          <a href="install.html">アプリ</a>
+        </nav>
+        <a class="nav-cta" href="#reserve">事前予約</a>
+        <nav class="nav-lang" aria-label="言語">
+          <a href="../index.html" hreflang="ko" lang="ko">한국어</a>
+          <span aria-hidden="true">|</span>
+          <a href="index.html" hreflang="ja" lang="ja" aria-current="true">日本語</a>
+        </nav>
+        <button class="menu" id="menu" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="gate">
+        <div class="gate-copy">
+          <p class="kicker" data-show="closed-beta">Closed beta</p>
+          <p class="kicker kicker-sky" data-show="open-beta" hidden>Open beta</p>
+          <p class="kicker kicker-sky" data-show="live" hidden>INEN</p>
+
+          <h1 data-show="closed-beta">
+            先着100名で、<br />
+            <em>扉を開きます。</em>
+          </h1>
+          <h1 data-show="open-beta" hidden>
+            いまから、<br />
+            <em>一緒に歩けます。</em>
+          </h1>
+          <h1 data-show="live" hidden>
+            今日のひとりに、<br />
+            <em>会いにいきます。</em>
+          </h1>
+
+          <p class="lede" data-show="closed-beta">
+            男性50名、女性50名。それぞれの定員に達した時点で、クローズドβを始めます。
+          </p>
+          <p class="lede" data-show="open-beta" hidden>
+            閉じたテストを経て、より多くの方と歩けるオープンβです。
+            ストーリーを読んでから、アプリのご案内へお進みください。
+          </p>
+          <p class="lede" data-show="live" hidden>
+            ストアでINENを受け取れます。その前に、ストーリーで呼吸を合わせてください。
+          </p>
+
+          <ol class="path" aria-label="参加の順番">
+            <li class="is-now"><span>01</span>事前予約</li>
+            <li><span>02</span>ストーリー</li>
+            <li><span>03</span>アプリ</li>
+          </ol>
+
+          <div class="seats" data-show="closed-beta">
+            <article data-seat="male">
+              <header>
+                <b>男性</b>
+                <em data-seat-tag>募集中</em>
+              </header>
+              <div class="seat-track is-sky" aria-hidden="true"><i data-seat-fill></i></div>
+              <p data-seat-count>0 / 50</p>
+            </article>
+            <article data-seat="female">
+              <header>
+                <b>女性</b>
+                <em data-seat-tag>募集中</em>
+              </header>
+              <div class="seat-track" aria-hidden="true"><i data-seat-fill></i></div>
+              <p data-seat-count>0 / 50</p>
+            </article>
+          </div>
+          <p class="seat-note" id="seat-note" data-show="closed-beta"></p>
+        </div>
+
+        <div class="gate-card" id="reserve">
+          <form class="begin-form" id="reserve-form">
+            <p class="kicker">Reserve</p>
+            <h2 data-show="closed-beta">クローズドβ<br />事前予約</h2>
+            <h2 data-show="open-beta live" hidden>いま、一緒に</h2>
+
+            <fieldset class="gender">
+              <legend>性別</legend>
+              <label><input type="radio" name="gender" value="male" required /> 男性</label>
+              <label><input type="radio" name="gender" value="female" /> 女性</label>
+            </fieldset>
+            <fieldset class="gender">
+              <legend>国籍</legend>
+              <label><input type="radio" name="nationality" value="kr" required /> 韓国</label>
+              <label><input type="radio" name="nationality" value="jp" /> 日本</label>
+            </fieldset>
+            <label>
+              お名前
+              <input name="name" type="text" autocomplete="name" required placeholder="お名前、または呼び名" />
+            </label>
+            <label>
+              メールアドレス
+              <input name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+            </label>
+            <button class="btn btn-fill" type="submit">予約してストーリーを見る</button>
+            <p class="fine">ご予約のあと、ホームでINENを読み、アプリのご案内へ続きます。</p>
+          </form>
+
+          <div class="reserve-ok" id="reserve-ok" hidden>
+            <p class="kicker kicker-sky">Saved</p>
+            <h2>次の画面へ<br />続きます</h2>
+            <p id="reserve-ok-copy"></p>
+            <div class="hero-actions">
+              <a class="btn btn-fill" href="home.html">ストーリーを読む</a>
+              <a class="btn btn-sky" href="install.html">アプリのご案内</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gate-photo">
+        <figure>
+          <img src="../images/intro-today.png" alt="夕暮れ、手をつないで歩くふたり" />
+        </figure>
+        <p>
+          先に見てみたい方は
+          <a href="home.html">ホームへ</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <a class="wordmark" href="home.html#top">INEN</a>
+        <p>Faith · Respect · Love</p>
+      </div>
+      <nav>
+        <a href="home.html#story">ストーリー</a>
+        <a href="home.html#how">使い方</a>
+        <a href="home.html#voices">出会い</a>
+        <a href="install.html">アプリ</a>
+        <a href="#reserve">事前予約</a>
+      </nav>
+      <p class="copy">© 2026 INEN. クローズドβから、本番へ。</p>
+    </footer>
+
+    <script src="../js/launch.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

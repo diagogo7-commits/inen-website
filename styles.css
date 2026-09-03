@@ -217,6 +217,44 @@ h3 {
   color: var(--sky-text);
 }
 
+.nav-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.nav-lang span {
+  color: var(--muted);
+  opacity: 0.45;
+  font-weight: 400;
+}
+
+.nav-lang a {
+  color: var(--muted);
+}
+
+.nav-lang a[aria-current="true"] {
+  color: var(--ink);
+}
+
+.nav-lang a:hover {
+  color: var(--ink);
+}
+
+html[lang="ja"] {
+  --sans: "Noto Sans JP", Manrope, "Hiragino Sans", "Yu Gothic", sans-serif;
+  --serif: "Cormorant Garamond", "Noto Serif JP", "Hiragino Mincho ProN", serif;
+}
+
+html[lang="ja"] body {
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+}
+
 .menu {
   display: none;
   width: 40px;
@@ -806,6 +844,11 @@ h3 {
   .nav-links,
   .nav-cta {
     display: none;
+  }
+
+  .nav-lang {
+    margin-left: auto;
+    margin-right: 4px;
   }
 
   .nav.is-open .nav-links {
