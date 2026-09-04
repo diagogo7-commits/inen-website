@@ -838,6 +838,15 @@ html[lang="ja"] body {
   color: var(--muted);
 }
 
+.footer-brand a[href^="mailto"] {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-brand a[href^="mailto"]:hover {
+  color: var(--ink);
+}
+
 .footer nav {
   display: flex;
   gap: 18px;

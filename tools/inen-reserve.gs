@@ -1,18 +1,18 @@
 /**
  * INEN 사전예약 수집
  *
- * 1) https://script.google.com 에서 새 프로젝트
- * 2) 이 파일을 붙여넣기
- * 3) OWNER_EMAIL 을 본인 지메일로 바꾸기
- * 4) 배포 > 새 배포 > 유형: 웹 앱
+ * 1) ineninfo@gmail.com 으로 https://script.google.com 에 로그인한 뒤 이 파일을 붙여넣기
+ * 2) 배포 > 새 배포 > 유형: 웹 앱
  *    - 실행 주체: 나
  *    - 액세스: 모든 사용자
- * 5) 나온 웹 앱 URL 을 js/launch.js 의 reserveUrl 에 넣기
+ * 3) 웹 앱 URL 이 바뀌면 js/launch.js 의 reserveUrl 을 갱신
  *
  * 명단은 Google 드라이브에 "INEN Reservations" 시트로 생깁니다.
  * 나중에 초대 메일을 보내려면 이 편집기에서 sendInvites 를 실행하세요.
  */
-var OWNER_EMAIL = "";
+var OWNER_EMAIL = "ineninfo@gmail.com";
+var FROM_EMAIL = "ineninfo@gmail.com";
+var FROM_NAME = "INEN";
 var CAPS = { male: 50, female: 50 };
 
 function doGet() {
@@ -69,7 +69,7 @@ function sendInvites() {
     var lang = rows[i][5] === "ja" ? "ja" : "ko";
     if (!email) continue;
     if (lang === "ja") {
-      MailApp.sendEmail({
+      sendMail_({
         to: email,
         subject: "INEN クローズドβのご案内",
         body:
@@ -80,7 +80,7 @@ function sendInvites() {
           "INEN",
       });
     } else {
-      MailApp.sendEmail({
+      sendMail_({
         to: email,
         subject: "INEN 클로즈 베타 안내",
         body:
@@ -133,7 +133,7 @@ function counts_() {
 
 function mailApplicant_(name, email, lang, status) {
   if (lang === "ja") {
-    MailApp.sendEmail({
+    sendMail_({
       to: email,
       subject: status === "waitlist" ? "INEN 事前予約（キャンセル待ち）" : "INEN 事前予約を受け付けました",
       body:
@@ -146,7 +146,7 @@ function mailApplicant_(name, email, lang, status) {
     });
     return;
   }
-  MailApp.sendEmail({
+  sendMail_({
     to: email,
     subject: status === "waitlist" ? "INEN 사전 예약 (대기)" : "INEN 사전 예약이 접수되었습니다",
     body:
@@ -161,7 +161,7 @@ function mailApplicant_(name, email, lang, status) {
 
 function mailOwner_(name, email, gender, nationality, status) {
   if (!OWNER_EMAIL) return;
-  MailApp.sendEmail({
+  sendMail_({
     to: OWNER_EMAIL,
     subject: "[INEN] 새 사전예약 " + name,
     body:
@@ -172,4 +172,22 @@ function mailOwner_(name, email, gender, nationality, status) {
       "상태: " + status + "\n" +
       "시트: 드라이브에서 INEN Reservations",
   });
+}
+
+function sendMail_(opts) {
+  try {
+    GmailApp.sendEmail(opts.to, opts.subject, opts.body, {
+      from: FROM_EMAIL,
+      name: FROM_NAME,
+      replyTo: FROM_EMAIL,
+    });
+  } catch (err) {
+    MailApp.sendEmail({
+      to: opts.to,
+      subject: opts.subject,
+      body: opts.body,
+      name: FROM_NAME,
+      replyTo: FROM_EMAIL,
+    });
+  }
 }

@@ -10,7 +10,7 @@
  */
 window.InenLaunch = {
   phase: "closed-beta",
-  reserveUrl: "https://script.google.com/macros/s/AKfycbyT37gfTxkVaVcQoP3sUoi3mDP69GLZ60HNljpS-f_8gtv8-mAuRFQIg34o7yzEQrY5/exec",
+  reserveUrl: "https://script.google.com/macros/s/AKfycbwWT3iOQaBMuAadcPI934ULw_PbYlPGjap4mWV5Ahx-JFtnnwH9IzHA8ee8Tp8s3Td7iw/exec",
   caps: { male: 50, female: 50 },
   seed: { male: 0, female: 0 },
   stillAcceptWhenFull: true,
