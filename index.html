@@ -130,8 +130,13 @@
               이메일
               <input name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
             </label>
+            <label class="hp" aria-hidden="true">
+              회사
+              <input name="company" type="text" tabindex="-1" autocomplete="off" />
+            </label>
             <button class="btn btn-fill" type="submit">예약하고 이야기 보기</button>
-            <p class="fine">예약 후 홈페이지에서 INEN을 읽고, 앱 설치 안내로 이어집니다.</p>
+            <p class="form-err" id="reserve-err" hidden></p>
+            <p class="fine">예약이 접수되면 확인 메일이 갑니다. 초대도 같은 메일로 드립니다.</p>
           </form>
 
           <div class="reserve-ok" id="reserve-ok" hidden>

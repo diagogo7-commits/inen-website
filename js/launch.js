@@ -6,17 +6,11 @@
  *   open-beta    오픈 베타 · 정식에 가까운 공개
  *   live         스토어 출시 이후
  *
- * 순서
- *   1) phase: "closed-beta", stores 비워 둔 채 랜딩을 연다
- *   2) TestFlight / Play 내부테스트 URL이 생기면 stores.ios / stores.android 에 넣는다
- *   3) 선착순 표시가 찼어도 stillAcceptWhenFull 로 접수는 계속된다
- *   4) 공개 범위를 넓히면 phase: "open-beta"
- *   5) 스토어 심사가 끝나면 phase: "live"
- *
- * 경로: 랜딩 index.html → 홈 home.html → 설치 install.html
+ * reserveUrl  Google Apps Script 웹 앱 주소 (tools/inen-reserve.gs)
  */
 window.InenLaunch = {
   phase: "closed-beta",
+  reserveUrl: "https://script.google.com/macros/s/AKfycbyT37gfTxkVaVcQoP3sUoi3mDP69GLZ60HNljpS-f_8gtv8-mAuRFQIg34o7yzEQrY5/exec",
   caps: { male: 50, female: 50 },
   seed: { male: 0, female: 0 },
   stillAcceptWhenFull: true,
@@ -33,7 +27,6 @@ window.InenLaunch = {
 
 (function () {
   const L = window.InenLaunch;
-  const KEY = "inen-reservations";
   const ja = document.documentElement.lang === "ja";
   const t = ja
     ? {
@@ -43,8 +36,11 @@ window.InenLaunch = {
         noteMale: "男性の先着は満員です。男性はキャンセル待ちで受け付けます。",
         noteFemale: "女性の先着は満員です。女性はキャンセル待ちで受け付けます。",
         noteOpen: "男女それぞれ50名に達した時点で、その性別は満員と表示されます。",
-        okWait: "先着はすでに埋まっています。キャンセル待ちに載せました。招待が開きましたら、メールでお知らせします。",
-        okSeat: "事前予約を受け付けました。ストーリーを読んで、インストールのご案内へお進みください。",
+        okWait: "先着はすでに埋まっています。キャンセル待ちに載せました。ご案内はメールでお送りします。",
+        okSeat: "事前予約を受け付けました。確認メールをお送りしました。ストーリーへお進みください。",
+        err: "予約を保存できませんでした。通信を確認して、もう一度お試しください。",
+        sending: "送信しています…",
+        submit: "予約してストーリーを見る",
       }
     : {
         closed: "모집 마감",
@@ -53,26 +49,19 @@ window.InenLaunch = {
         noteMale: "남성 선착순은 마감되었습니다. 남성은 대기 명단으로 접수됩니다.",
         noteFemale: "여성 선착순은 마감되었습니다. 여성은 대기 명단으로 접수됩니다.",
         noteOpen: "남 · 여 각 50명 모집 시 해당 성별은 마감으로 표시됩니다.",
-        okWait: "선착순은 이미 찼습니다. 대기 명단에 올렸고, 초대가 열리면 메일로 알려 드립니다.",
-        okSeat: "사전 예약이 접수되었습니다. 이야기를 읽고, 설치 안내로 이어져 주세요.",
+        okWait: "선착순은 이미 찼습니다. 대기 명단에 올렸고, 안내는 메일로 드립니다.",
+        okSeat: "사전 예약이 접수되었습니다. 확인 메일을 보냈습니다. 이야기를 이어서 읽어 주세요.",
+        err: "예약을 저장하지 못했습니다. 연결을 확인한 뒤 다시 시도해 주세요.",
+        sending: "접수 중…",
+        submit: "예약하고 이야기 보기",
       };
 
-  function reservations() {
-    try {
-      return JSON.parse(localStorage.getItem(KEY) || "[]");
-    } catch {
-      return [];
-    }
-  }
+  let remote = { male: 0, female: 0 };
 
   function counts() {
-    const extra = { male: 0, female: 0 };
-    reservations().forEach((row) => {
-      if (row.gender === "male" || row.gender === "female") extra[row.gender] += 1;
-    });
     return {
-      male: L.seed.male + extra.male,
-      female: L.seed.female + extra.female,
+      male: L.seed.male + remote.male,
+      female: L.seed.female + remote.female,
     };
   }
 
@@ -114,31 +103,75 @@ window.InenLaunch = {
     }
   }
 
+  async function api(body) {
+    if (!L.reserveUrl) throw new Error("no-endpoint");
+    const res = await fetch(L.reserveUrl, {
+      method: body ? "POST" : "GET",
+      redirect: "follow",
+      headers: body ? { "Content-Type": "text/plain;charset=utf-8" } : undefined,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const data = await res.json();
+    if (!data || data.ok === false) throw new Error(data && data.error ? data.error : "fail");
+    return data;
+  }
+
+  async function refreshCounts() {
+    try {
+      const data = await api();
+      if (data.counts) remote = data.counts;
+    } catch {
+      /* 시트가 아직 연결되지 않으면 0으로 둡니다 */
+    }
+    paintSeats();
+  }
+
   function wireReserve() {
     const form = document.getElementById("reserve-form");
     if (!form) return;
     const ok = document.getElementById("reserve-ok");
     const okCopy = document.getElementById("reserve-ok-copy");
-    form.addEventListener("submit", (e) => {
+    const err = document.getElementById("reserve-err");
+    const btn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (err) err.hidden = true;
       const data = Object.fromEntries(new FormData(form).entries());
-      const now = counts();
-      const full = now[data.gender] >= L.caps[data.gender];
-      const row = {
-        ...data,
-        status: full ? "waitlist" : "seat",
-        phase: L.phase,
-        at: new Date().toISOString(),
-      };
-      const list = reservations();
-      list.push(row);
-      localStorage.setItem(KEY, JSON.stringify(list));
-      form.hidden = true;
-      if (ok) ok.hidden = false;
-      if (okCopy) {
-        okCopy.textContent = full ? t.okWait : t.okSeat;
+      if (data.company) {
+        form.hidden = true;
+        if (ok) ok.hidden = false;
+        return;
       }
-      paintSeats();
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = t.sending;
+      }
+      try {
+        const result = await api({
+          name: data.name,
+          email: data.email,
+          gender: data.gender,
+          nationality: data.nationality,
+          lang: ja ? "ja" : "ko",
+          page: location.href,
+        });
+        if (result.counts) remote = result.counts;
+        form.hidden = true;
+        if (ok) ok.hidden = false;
+        if (okCopy) okCopy.textContent = result.status === "waitlist" ? t.okWait : t.okSeat;
+        paintSeats();
+      } catch {
+        if (err) {
+          err.hidden = false;
+          err.textContent = t.err;
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = t.submit;
+        }
+      }
     });
   }
 
@@ -166,6 +199,7 @@ window.InenLaunch = {
 
   applyPhase();
   paintSeats();
+  refreshCounts();
   wireReserve();
   wireStores();
 })();

@@ -130,8 +130,13 @@
               メールアドレス
               <input name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
             </label>
+            <label class="hp" aria-hidden="true">
+              会社
+              <input name="company" type="text" tabindex="-1" autocomplete="off" />
+            </label>
             <button class="btn btn-fill" type="submit">予約してストーリーを見る</button>
-            <p class="fine">ご予約のあと、ホームでINENを読み、アプリのご案内へ続きます。</p>
+            <p class="form-err" id="reserve-err" hidden></p>
+            <p class="fine">予約が届くと確認メールをお送りします。招待も同じメールへご案内します。</p>
           </form>
 
           <div class="reserve-ok" id="reserve-ok" hidden>

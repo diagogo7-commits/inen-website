@@ -775,6 +775,7 @@ html[lang="ja"] body {
 }
 
 .begin-form {
+  position: relative;
   display: grid;
   gap: 14px;
 }
@@ -806,6 +807,18 @@ html[lang="ja"] body {
 .form-ok {
   font-size: 14px;
   color: var(--olive);
+}
+
+.form-err {
+  font-size: 13px;
+  color: var(--coral-deep);
+}
+
+.begin-form .hp {
+  position: absolute;
+  left: -9999px;
+  height: 0;
+  overflow: hidden;
 }
 
 .footer {
