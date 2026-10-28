@@ -1272,3 +1272,65 @@ html[lang="ja"] body {
     transition: none;
   }
 }
+
+/* legal pages */
+.footer .legal {
+  margin: 0;
+  font-size: 13px;
+}
+
+.footer .legal a {
+  color: inherit;
+}
+
+.legal-doc {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.legal-doc h1 {
+  font-size: 30px;
+  margin: 0 0 6px;
+}
+
+.legal-doc .updated {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin: 0 0 36px;
+}
+
+.legal-doc h2 {
+  font-size: 19px;
+  margin: 40px 0 10px;
+}
+
+.legal-doc p,
+.legal-doc li {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.legal-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.legal-doc th,
+.legal-doc td {
+  border: 1px solid rgba(61, 55, 51, 0.15);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-doc .box {
+  background: var(--paper);
+  border: 1px solid rgba(61, 55, 51, 0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+}

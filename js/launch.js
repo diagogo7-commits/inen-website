@@ -7,6 +7,8 @@
  *   live         스토어 출시 이후
  *
  * reserveUrl  Google Apps Script 웹 앱 주소 (tools/inen-reserve.gs)
+ * stores      TestFlight 공개 링크(ios), Play 테스트 참여 링크(android), 테스터 그룹(androidGroup)
+ *             예약은 시트와 함께 js/firebase-config.js 의 Firestore 에도 저장되어 admin.html 에 보입니다.
  */
 window.InenLaunch = {
   phase: "closed-beta",
@@ -17,6 +19,7 @@ window.InenLaunch = {
   stores: {
     ios: "",
     android: "",
+    androidGroup: "",
   },
   paths: {
     landing: "index.html",
@@ -116,6 +119,33 @@ window.InenLaunch = {
     return data;
   }
 
+  async function saveToAdmin(data, seat) {
+    const cfg = window.InenFirebaseConfig;
+    if (!cfg || !cfg.projectId || !cfg.apiKey) throw new Error("no-admin");
+    const str = (v, max) => ({ stringValue: String(v || "").trim().slice(0, max) });
+    const url =
+      `https://firestore.googleapis.com/v1/projects/${encodeURIComponent(cfg.projectId)}` +
+      `/databases/(default)/documents/reservations?key=${encodeURIComponent(cfg.apiKey)}`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fields: {
+          name: str(data.name, 60),
+          email: str(String(data.email || "").toLowerCase(), 120),
+          gender: str(data.gender, 10),
+          nationality: str(data.nationality, 10),
+          lang: str(data.lang, 4),
+          page: str(data.page, 300),
+          seat: str(seat || "", 12),
+          status: { stringValue: "new" },
+          at: { integerValue: String(Date.now()) },
+        },
+      }),
+    });
+    if (!res.ok) throw new Error(`admin-${res.status}`);
+  }
+
   async function refreshCounts() {
     try {
       const data = await api();
@@ -147,15 +177,30 @@ window.InenLaunch = {
         btn.disabled = true;
         btn.textContent = t.sending;
       }
+      const entry = {
+        name: data.name,
+        email: data.email,
+        gender: data.gender,
+        nationality: data.nationality,
+        lang: ja ? "ja" : "ko",
+        page: location.href,
+      };
       try {
-        const result = await api({
-          name: data.name,
-          email: data.email,
-          gender: data.gender,
-          nationality: data.nationality,
-          lang: ja ? "ja" : "ko",
-          page: location.href,
-        });
+        let sheet;
+        try {
+          sheet = { ok: true, value: await api(entry) };
+        } catch (reason) {
+          sheet = { ok: false, reason };
+        }
+        let saved = false;
+        try {
+          await saveToAdmin(entry, sheet.ok ? sheet.value.status : "");
+          saved = true;
+        } catch {
+          saved = false;
+        }
+        if (!sheet.ok && !saved) throw sheet.reason;
+        const result = sheet.ok ? sheet.value : {};
         if (result.counts) remote = result.counts;
         form.hidden = true;
         if (ok) ok.hidden = false;
@@ -176,6 +221,9 @@ window.InenLaunch = {
   }
 
   function wireStores() {
+    document.querySelectorAll("[data-store-group]").forEach((el) => {
+      el.hidden = !L.stores.androidGroup;
+    });
     document.querySelectorAll("[data-store]").forEach((el) => {
       const url = L.stores[el.dataset.store];
       const soon = el.querySelector("[data-store-soon]");

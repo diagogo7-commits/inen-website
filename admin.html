@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>INEN 관리자</title>
+    <link rel="icon" type="image/png" href="images/favicon.png?v=2" />
+    <style>
+      :root {
+        --ink: #3d3733;
+        --soft: #7a7068;
+        --line: #e8e1d9;
+        --paper: #fffdfa;
+        --bg: #f7f3ee;
+        --rose: #c9788a;
+        --sky: #6f9cc0;
+        --ok: #4f8a63;
+        --no: #b8584f;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        font-size: 14px;
+      }
+      header.top {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 24px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      header.top b { font-size: 18px; letter-spacing: 0.2em; }
+      header.top .who { margin-left: auto; color: var(--soft); }
+      nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+      nav.tabs button {
+        border: 0;
+        background: none;
+        padding: 8px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        color: var(--soft);
+        font: inherit;
+      }
+      nav.tabs button.on { background: var(--ink); color: #fff; }
+      nav.tabs em { font-style: normal; background: var(--rose); color: #fff; border-radius: 999px; padding: 0 6px; margin-left: 4px; font-size: 11px; }
+      main { padding: 24px; max-width: 1280px; margin: 0 auto; }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+      .stat b { display: block; font-size: 28px; margin: 4px 0; }
+      .stat small { color: var(--soft); }
+      table { width: 100%; border-collapse: collapse; background: var(--paper); }
+      th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      th { font-weight: 600; color: var(--soft); font-size: 12px; position: sticky; top: 58px; background: var(--paper); }
+      .tools { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+      input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+      button.btn {
+        font: inherit;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 10px;
+        padding: 7px 12px;
+        cursor: pointer;
+      }
+      button.btn.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+      button.btn.no { background: var(--no); color: #fff; border-color: var(--no); }
+      button.btn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+      button.btn:disabled { opacity: 0.5; cursor: default; }
+      .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; background: var(--line); }
+      .pill.wait { background: #f3e3c4; }
+      .pill.ok { background: #d6ead9; }
+      .pill.no { background: #f2d4cf; }
+      .app { display: grid; grid-template-columns: 260px 1fr; gap: 18px; }
+      .photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .photos img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; background: var(--line); cursor: zoom-in; }
+      dl { display: grid; grid-template-columns: 120px 1fr; gap: 6px 12px; margin: 0; }
+      dt { color: var(--soft); }
+      dd { margin: 0; white-space: pre-wrap; word-break: break-word; }
+      .reasons { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 12px 0; }
+      .muted { color: var(--soft); }
+      .diff del { color: var(--no); }
+      .diff ins { color: var(--ok); text-decoration: none; }
+      .login { max-width: 380px; margin: 12vh auto; }
+      .login input { width: 100%; margin-bottom: 10px; }
+      .msg { white-space: pre-wrap; }
+      #zoom { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 20; }
+      #zoom img { max-width: 92vw; max-height: 92vh; border-radius: 12px; }
+      @media (max-width: 760px) { .app { grid-template-columns: 1fr; } main { padding: 14px; } }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <b>INEN</b>
+      <nav class="tabs" id="tabs" hidden></nav>
+      <span class="who" id="who"></span>
+    </header>
+    <main id="root"><p class="muted">불러오는 중…</p></main>
+    <div id="zoom"><img alt="" /></div>
+    <script src="js/firebase-config.js"></script>
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>

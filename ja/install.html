@@ -92,7 +92,11 @@
             <small data-store-soon>登録の準備中 · リンクができ次第つながります</small>
             <small data-store-ready hidden>タップしてインストール</small>
           </a>
-          <p class="fine">リンクの準備ができたら、このカードが App Store と Google Play に変わります。</p>
+          <p class="fine" data-store-group hidden>
+            Android の方は、まず <a data-store="androidGroup" href="#">INEN テスターグループ</a> に参加してから（招待メールと同じ Google アカウント）、
+            Google Play のカードを押してテストに参加してください。
+          </p>
+          <p class="fine">iPhone は先に TestFlight アプリが入り、その中で INEN を受け取ります。リンクの準備ができたら、このカードがすぐにつながります。</p>
           <div class="hero-actions">
             <a class="btn btn-sky" href="home.html">ストーリーへ戻る</a>
           </div>
@@ -113,9 +117,11 @@
         <a href="install.html">アプリ</a>
         <a href="index.html#reserve">事前予約</a>
       </nav>
+      <p class="legal"><a href="terms.html">利用規約</a> · <a href="privacy.html">プライバシーポリシー</a></p>
       <p class="copy">© 2026 INEN. 招待が届く日を、待っています。</p>
     </footer>
 
+    <script src="../js/firebase-config.js"></script>
     <script src="../js/launch.js"></script>
     <script src="../script.js"></script>
   </body>
