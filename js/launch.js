@@ -119,6 +119,21 @@ window.InenLaunch = {
     return data;
   }
 
+  function landingPage() {
+    const KEY = "inen-source";
+    const here = new URL(location.href);
+    const source = here.searchParams.get("utm_source") || here.searchParams.get("from");
+    try {
+      if (source) sessionStorage.setItem(KEY, source);
+      const kept = sessionStorage.getItem(KEY);
+      if (kept && !source) here.searchParams.set("utm_source", kept);
+    } catch {
+      /* 저장소를 막은 브라우저는 현재 주소만 남깁니다 */
+    }
+    return here.toString();
+  }
+  landingPage();
+
   async function saveToAdmin(data, seat) {
     const cfg = window.InenFirebaseConfig;
     if (!cfg || !cfg.projectId || !cfg.apiKey) throw new Error("no-admin");
@@ -183,7 +198,7 @@ window.InenLaunch = {
         gender: data.gender,
         nationality: data.nationality,
         lang: ja ? "ja" : "ko",
-        page: location.href,
+        page: landingPage(),
       };
       try {
         let sheet;
