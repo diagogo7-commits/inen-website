@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>INEN — 앱 설치</title>
-    <meta name="description" content="INEN 앱 설치 안내. 스토어 등록이 끝나는 순간, 이 화면에서 바로 연결됩니다." />
+    <meta name="description" content="INEN 앱 설치 안내. App Store · Google Play에서 받고, 가입·프로필 후 승인을 기다립니다." />
     <meta name="theme-color" content="#f7f3ee" />
     <link rel="icon" type="image/png" href="images/favicon.png?v=2" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
@@ -30,7 +30,7 @@
           <a href="home.html#voices">만남</a>
           <a href="install.html" aria-current="page">앱 설치</a>
         </nav>
-        <a class="nav-cta" href="index.html#reserve">사전 예약</a>
+        <a class="nav-cta" href="#stores">앱 받기</a>
         <nav class="nav-lang" aria-label="언어">
           <a href="install.html" hreflang="ko" lang="ko" aria-current="true">한국어</a>
           <span aria-hidden="true">|</span>
@@ -45,37 +45,22 @@
     <main>
       <section class="install">
         <div class="install-copy">
-          <p class="kicker" data-show="closed-beta">Invite</p>
-          <p class="kicker kicker-sky" data-show="open-beta" hidden>Open beta</p>
-          <p class="kicker kicker-sky" data-show="live" hidden>Download</p>
+          <p class="kicker kicker-sky">Download</p>
 
-          <h1 data-show="closed-beta">
-            초대가 오면,<br />
-            <em>여기에서 설치합니다.</em>
-          </h1>
-          <h1 data-show="open-beta" hidden>
-            오픈 베타를<br />
-            <em>이 화면에서 받습니다.</em>
-          </h1>
-          <h1 data-show="live" hidden>
+          <h1>
             INEN을<br />
-            <em>지금 설치합니다.</em>
+            <em>스토어에서 받으세요.</em>
           </h1>
 
-          <p class="lede" data-show="closed-beta">
-            아직 앱스토어와 Google Play에 올라가지 않았습니다.
-            TestFlight나 내부 테스트 링크가 생기는 즉시 아래 버튼이 연결됩니다.
-            그전까지는 예약과 이야기가 먼저입니다.
-          </p>
-          <p class="lede" data-show="open-beta live" hidden>
+          <p class="lede">
             iOS와 Android 중 쓰시는 쪽으로 이어집니다.
-            교회 인증 뒤에 오늘의 소개가 열립니다.
+            설치 후 가입·프로필·교회 인증까지 진행할 수 있고, 인원이 모이면 승인과 함께 소개가 열립니다.
           </p>
 
           <ol class="path" aria-label="설치까지">
-            <li><span>01</span>사전 예약</li>
-            <li><span>02</span>이야기</li>
-            <li class="is-now"><span>03</span>앱 설치</li>
+            <li class="is-now"><span>01</span>앱 설치</li>
+            <li><span>02</span>가입 · 프로필</li>
+            <li><span>03</span>승인 후 소개</li>
           </ol>
         </div>
 
@@ -93,12 +78,16 @@
             <small data-store-ready hidden>탭해서 설치하기</small>
           </a>
           <p class="fine" data-store-group hidden>
-            Android는 먼저 <a data-store="androidGroup" href="#">INEN 테스터 그룹</a>에 가입한 뒤(초대 메일과 같은 Google 계정),
-            Google Play 카드를 눌러 테스트에 참여해 주세요.
+            Android는 먼저 <a data-store="androidGroup" href="#">INEN 테스터 그룹</a>에 가입한 뒤(같은 Google 계정),
+            Google Play 카드를 눌러 주세요.
           </p>
-          <p class="fine">iPhone은 TestFlight 앱이 먼저 설치되고, 그 안에서 INEN을 받습니다. 링크가 준비되면 이 카드가 바로 연결됩니다.</p>
+          <p class="fine">
+            앱에서 가입을 마친 뒤 <strong>알림을 꼭 켜 두세요.</strong>
+            인원이 모여 소개가 시작될 때 바로 안내받을 수 있습니다.
+          </p>
           <div class="hero-actions">
             <a class="btn btn-sky" href="home.html">이야기로 돌아가기</a>
+            <a class="btn btn-fill" href="index.html">처음으로</a>
           </div>
         </div>
       </section>
@@ -115,10 +104,9 @@
         <a href="home.html#how">이용 방법</a>
         <a href="home.html#voices">만남</a>
         <a href="install.html">앱 설치</a>
-        <a href="index.html#reserve">사전 예약</a>
       </nav>
       <p class="legal"><a href="terms.html">이용약관</a> · <a href="privacy.html">개인정보 처리방침</a></p>
-      <p class="copy">© 2026 INEN. 초대가 오는 날을 위해.</p>
+      <p class="copy">© 2026 INEN. 클로즈 베타에서 시작해, 정식으로 이어집니다.</p>
     </footer>
 
     <script src="js/firebase-config.js"></script>
