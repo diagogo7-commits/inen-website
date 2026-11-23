@@ -98,7 +98,50 @@
       .msg { white-space: pre-wrap; }
       #zoom { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 20; }
       #zoom img { max-width: 92vw; max-height: 92vh; border-radius: 12px; }
-      @media (max-width: 760px) { .app { grid-template-columns: 1fr; } main { padding: 14px; } }
+      @media (max-width: 760px) {
+        header.top {
+          flex-wrap: wrap;
+          gap: 8px;
+          padding: 10px 12px;
+          align-items: flex-start;
+        }
+        header.top .who {
+          margin-left: 0;
+          width: 100%;
+          font-size: 12px;
+          order: 3;
+        }
+        nav.tabs {
+          width: 100%;
+          order: 2;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 2px;
+        }
+        nav.tabs button {
+          flex: 0 0 auto;
+          padding: 10px 14px;
+          font-size: 14px;
+        }
+        main { padding: 12px; }
+        .app { grid-template-columns: 1fr; gap: 12px; }
+        .photos { grid-template-columns: repeat(2, 1fr); }
+        dl { grid-template-columns: 88px 1fr; }
+        table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        th { position: static; }
+        .card .btn.ok,
+        .card .btn.no,
+        .card .btn.dark {
+          display: block;
+          width: 100%;
+          min-height: 44px;
+          margin: 8px 0 0;
+          font-size: 15px;
+        }
+        .login { margin: 8vh 12px; }
+        .reasons label { min-height: 36px; display: inline-flex; align-items: center; }
+      }
     </style>
   </head>
   <body>
@@ -109,7 +152,7 @@
     </header>
     <main id="root"><p class="muted">불러오는 중…</p></main>
     <div id="zoom"><img alt="" /></div>
-    <script src="js/firebase-config.js?v=2"></script>
-    <script type="module" src="js/admin.js?v=2"></script>
+    <script src="js/firebase-config.js?v=3"></script>
+    <script type="module" src="js/admin.js?v=3"></script>
   </body>
 </html>
